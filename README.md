@@ -50,7 +50,7 @@ func (manager *MockResourceManager) Cancel(_ context.Context, req *pb.CancelRequ
 
 func main() {
     mock := &MockResourceManager{}
-	redisCli := redis.NewClient(&redis.Options{Addr: "localhost:6379", Password: "123456"})
+    redisCli := redis.NewClient(&redis.Options{Addr: "localhost:6379", Password: "123456"})
     rm := resource_manager.New(mock, redisCli, resource_manager.WithPort(9210))
     if err := rm.Run(); err != nil {
         panic(err)
