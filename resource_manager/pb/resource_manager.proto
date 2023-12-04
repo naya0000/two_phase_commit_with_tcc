@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "github.com/if-nil/tcc-toy/resource_manager/pb";
+
+package resource_manager;
+
+// 定义tcc的资源管理器
+service ResourceManager {
+  rpc Try (TryRequest) returns (TryReply) {}
+  rpc Commit (CommitRequest) returns (CommitReply) {}
+  rpc Cancel (CancelRequest) returns (CancelReply) {}
+}
+
+message TryRequest {
+  string xid = 1;
+  string param = 2;
+}
+
+enum StatusCode {
+  OK = 0;
+  FAIL = 1;
+}
+
+message TryReply {
+  string message = 1;
+}
+
+message CommitRequest {
+  string xid = 1;
+  string param = 2;
+}
+
+message CommitReply {
+  string message = 1;
+}
+
+message CancelRequest {
+  string xid = 1;
+  string param = 2;
+}
+
+message CancelReply {
+  string message = 1;
+}
