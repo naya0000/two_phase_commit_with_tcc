@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
-	"github.com/if-nil/tcc-toy/resource_manager/pb"
+	"github.com/if-nil/tcc-toy/pb"
 	"google.golang.org/grpc"
 	"sync"
 	"time"

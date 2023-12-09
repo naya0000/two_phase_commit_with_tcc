@@ -3,8 +3,8 @@ package transaction
 import (
 	"context"
 	"fmt"
+	"github.com/if-nil/tcc-toy/pb"
 	"github.com/if-nil/tcc-toy/resource_manager"
-	"github.com/if-nil/tcc-toy/resource_manager/pb"
 	"github.com/if-nil/tcc-toy/transaction_manager"
 	"github.com/redis/go-redis/v9"
 	"sync"
