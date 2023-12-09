@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ResourceManager_Try_FullMethodName    = "/resource_manager.ResourceManager/Try"
-	ResourceManager_Commit_FullMethodName = "/resource_manager.ResourceManager/Commit"
-	ResourceManager_Cancel_FullMethodName = "/resource_manager.ResourceManager/Cancel"
+	ResourceManager_Try_FullMethodName    = "/pb.ResourceManager/Try"
+	ResourceManager_Commit_FullMethodName = "/pb.ResourceManager/Commit"
+	ResourceManager_Cancel_FullMethodName = "/pb.ResourceManager/Cancel"
 )
 
 // ResourceManagerClient is the client API for ResourceManager service.
@@ -162,7 +162,7 @@ func _ResourceManager_Cancel_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ResourceManager_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "resource_manager.ResourceManager",
+	ServiceName: "pb.ResourceManager",
 	HandlerType: (*ResourceManagerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

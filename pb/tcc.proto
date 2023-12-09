@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "github.com/if-nil/tcc-toy/pb";
 
-package resource_manager;
+package pb;
 
 // 定义tcc的资源管理器
 service ResourceManager {
