@@ -16,11 +16,6 @@ message TryRequest {
   string param = 2;
 }
 
-enum StatusCode {
-  OK = 0;
-  FAIL = 1;
-}
-
 message TryReply {
   string message = 1;
 }
