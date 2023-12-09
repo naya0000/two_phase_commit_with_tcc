@@ -20,52 +20,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StatusCode int32
-
-const (
-	StatusCode_OK   StatusCode = 0
-	StatusCode_FAIL StatusCode = 1
-)
-
-// Enum value maps for StatusCode.
-var (
-	StatusCode_name = map[int32]string{
-		0: "OK",
-		1: "FAIL",
-	}
-	StatusCode_value = map[string]int32{
-		"OK":   0,
-		"FAIL": 1,
-	}
-)
-
-func (x StatusCode) Enum() *StatusCode {
-	p := new(StatusCode)
-	*p = x
-	return p
-}
-
-func (x StatusCode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (StatusCode) Descriptor() protoreflect.EnumDescriptor {
-	return file_tcc_proto_enumTypes[0].Descriptor()
-}
-
-func (StatusCode) Type() protoreflect.EnumType {
-	return &file_tcc_proto_enumTypes[0]
-}
-
-func (x StatusCode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use StatusCode.Descriptor instead.
-func (StatusCode) EnumDescriptor() ([]byte, []int) {
-	return file_tcc_proto_rawDescGZIP(), []int{0}
-}
-
 type TryRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -393,9 +347,7 @@ var file_tcc_proto_rawDesc = []byte{
 	0x12, 0x14, 0x0a, 0x05, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x05, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x22, 0x27, 0x0a, 0x0b, 0x43, 0x61, 0x6e, 0x63, 0x65, 0x6c,
 	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2a,
-	0x1e, 0x0a, 0x0a, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x06, 0x0a,
-	0x02, 0x4f, 0x4b, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x46, 0x41, 0x49, 0x4c, 0x10, 0x01, 0x32,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32,
 	0x98, 0x01, 0x0a, 0x0f, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x4d, 0x61, 0x6e, 0x61,
 	0x67, 0x65, 0x72, 0x12, 0x25, 0x0a, 0x03, 0x54, 0x72, 0x79, 0x12, 0x0e, 0x2e, 0x70, 0x62, 0x2e,
 	0x54, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e, 0x70, 0x62, 0x2e,
@@ -423,24 +375,22 @@ func file_tcc_proto_rawDescGZIP() []byte {
 	return file_tcc_proto_rawDescData
 }
 
-var file_tcc_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tcc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_tcc_proto_goTypes = []interface{}{
-	(StatusCode)(0),       // 0: pb.StatusCode
-	(*TryRequest)(nil),    // 1: pb.TryRequest
-	(*TryReply)(nil),      // 2: pb.TryReply
-	(*CommitRequest)(nil), // 3: pb.CommitRequest
-	(*CommitReply)(nil),   // 4: pb.CommitReply
-	(*CancelRequest)(nil), // 5: pb.CancelRequest
-	(*CancelReply)(nil),   // 6: pb.CancelReply
+	(*TryRequest)(nil),    // 0: pb.TryRequest
+	(*TryReply)(nil),      // 1: pb.TryReply
+	(*CommitRequest)(nil), // 2: pb.CommitRequest
+	(*CommitReply)(nil),   // 3: pb.CommitReply
+	(*CancelRequest)(nil), // 4: pb.CancelRequest
+	(*CancelReply)(nil),   // 5: pb.CancelReply
 }
 var file_tcc_proto_depIdxs = []int32{
-	1, // 0: pb.ResourceManager.Try:input_type -> pb.TryRequest
-	3, // 1: pb.ResourceManager.Commit:input_type -> pb.CommitRequest
-	5, // 2: pb.ResourceManager.Cancel:input_type -> pb.CancelRequest
-	2, // 3: pb.ResourceManager.Try:output_type -> pb.TryReply
-	4, // 4: pb.ResourceManager.Commit:output_type -> pb.CommitReply
-	6, // 5: pb.ResourceManager.Cancel:output_type -> pb.CancelReply
+	0, // 0: pb.ResourceManager.Try:input_type -> pb.TryRequest
+	2, // 1: pb.ResourceManager.Commit:input_type -> pb.CommitRequest
+	4, // 2: pb.ResourceManager.Cancel:input_type -> pb.CancelRequest
+	1, // 3: pb.ResourceManager.Try:output_type -> pb.TryReply
+	3, // 4: pb.ResourceManager.Commit:output_type -> pb.CommitReply
+	5, // 5: pb.ResourceManager.Cancel:output_type -> pb.CancelReply
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -532,14 +482,13 @@ func file_tcc_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_tcc_proto_rawDesc,
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_tcc_proto_goTypes,
 		DependencyIndexes: file_tcc_proto_depIdxs,
-		EnumInfos:         file_tcc_proto_enumTypes,
 		MessageInfos:      file_tcc_proto_msgTypes,
 	}.Build()
 	File_tcc_proto = out.File
