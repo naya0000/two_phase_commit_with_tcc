@@ -106,13 +106,13 @@ func (t *Transaction) backoff() {
 	time.Sleep(time.Second)
 }
 
-func TCCCall(tryCall func(*Transaction) Operation) (err error) {
+func TCCCall(txFunc func(*Transaction) Operation) (err error) {
 	t := &Transaction{
 		xid:       uuid.New().String(),
 		ctx:       context.Background(),
 		resources: make([]pb.ResourceManagerClient, 0),
 	}
-	o := tryCall(t)
+	o := txFunc(t)
 	if o == commit {
 		t.commit()
 	} else if o == cancel {
