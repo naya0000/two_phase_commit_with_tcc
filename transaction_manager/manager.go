@@ -3,15 +3,17 @@ package transaction_manager
 import (
 	"context"
 	"fmt"
+	"sync"
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/if-nil/tcc-toy/pb"
 	"google.golang.org/grpc"
-	"sync"
-	"time"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 type Transaction struct {
-	xid       string
+	xid       string // transaction id
 	ctx       context.Context
 	resources []pb.ResourceManagerClient
 }
@@ -24,10 +26,12 @@ const (
 )
 
 func (t *Transaction) CallTry(host string, req *pb.TryRequest) (*pb.TryReply, error) {
-	conn, err := grpc.Dial(host, grpc.WithInsecure(), grpc.WithBlock())
+	// Create a connection to the resource manager
+	conn, err := grpc.Dial(host, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithBlock())
 	if err != nil {
 		return nil, err
 	}
+	// Create a resource manager client
 	resourceClient := pb.NewResourceManagerClient(conn)
 	t.resources = append(t.resources, resourceClient)
 	req.Xid = t.xid

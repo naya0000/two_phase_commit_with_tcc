@@ -3,12 +3,14 @@ package main
 import (
 	"context"
 	"errors"
-	"github.com/if-nil/tcc-toy/pb"
-	"github.com/if-nil/tcc-toy/resource_manager"
-	"github.com/redis/go-redis/v9"
+	"fmt"
 	"log"
 	"math/rand"
 	"sync"
+
+	"github.com/if-nil/tcc-toy/pb"
+	"github.com/if-nil/tcc-toy/resource_manager"
+	"github.com/redis/go-redis/v9"
 )
 
 type MockResourceManager struct {
@@ -17,6 +19,7 @@ type MockResourceManager struct {
 
 func (manager *MockResourceManager) Try(_ context.Context, req *pb.TryRequest) (*pb.TryReply, error) {
 	log.Printf("try -- xid: %s, param: %s\n", req.Xid, req.Param)
+	// Mock random error during try phase
 	if rand.Intn(10)%2 == 0 {
 		return &pb.TryReply{}, errors.New("random error")
 	}
@@ -34,19 +37,22 @@ func (manager *MockResourceManager) Cancel(_ context.Context, req *pb.CancelRequ
 }
 
 func main() {
-	redisCli := redis.NewClient(&redis.Options{Addr: "mydomain.com:6379", Password: "123456"})
+	redisCli := redis.NewClient(&redis.Options{Addr: "localhost:6379"})
 	wg := sync.WaitGroup{}
 	resourceManager := func(port int) {
 		defer wg.Done()
-		// 启动一个resource manager
+		//start a resource manager server
 		mock := &MockResourceManager{}
 		rm := resource_manager.New(mock, redisCli, resource_manager.WithPort(port))
+		fmt.Printf("resource manager server on port %d is running", port)
+
 		if err := rm.Run(); err != nil {
-			log.Printf("resource manager failed: %v", err)
+			fmt.Printf("resource manager on port %d failed: %v", port, err)
 			return
 		}
 	}
 	wg.Add(2)
+	// Start 2 resource manager server
 	go resourceManager(9210)
 	go resourceManager(9211)
 	wg.Wait()

@@ -3,13 +3,14 @@ package resource_manager
 import (
 	"context"
 	"fmt"
+	"net"
+
 	"github.com/google/uuid"
 	"github.com/if-nil/tcc-toy/pb"
 	"github.com/redis/go-redis/v9"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"net"
 )
 
 const (
@@ -75,6 +76,7 @@ func (m *Manager) Commit(ctx context.Context, req *pb.CommitRequest) (*pb.Commit
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to run commit script: %v", err)
 	}
+	// 0: 不存在 1: 已提交
 	if res.(int64) != 0 {
 		return &pb.CommitReply{
 			Message: fmt.Sprintf("xid %s already committed", req.Xid),
